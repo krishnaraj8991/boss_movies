@@ -2,6 +2,8 @@ import {
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_FAILURE,
+  SORT_BY_YEAR,
+  SORT_BY_RATING,
 } from "./moviesTypes";
 export const fetchMoviesRequest = () => {
   return {
@@ -20,7 +22,16 @@ export const fetchMoviesFailure = (error) => {
     payload: error,
   };
 };
-
+export const SortByYear = () => {
+  return {
+    type: SORT_BY_YEAR,
+  };
+};
+export const SortByRating = () => {
+  return {
+    type: SORT_BY_RATING,
+  };
+};
 export const fetchMovies = () => {
   return function (dispatch) {
     dispatch(fetchMoviesRequest());

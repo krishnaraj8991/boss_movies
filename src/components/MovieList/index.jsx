@@ -1,26 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import refresh from "../../assets/refresh.png";
-import { fetchMovies } from "../../store/movies/moviesActions";
+import { ratingIcon, reloadIcon, yearIcon } from "../../assets";
+import {
+  fetchMovies,
+  SortByRating,
+  SortByYear,
+} from "../../store/movies/moviesActions";
 const MovieList = () => {
   const movies = useSelector((state) => state.moviesList);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log(movies, error);
-  }, [movies, error]);
-  const HandleClickEvent = () => {
-    dispatch(fetchMovies());
+  }, [movies]);
+  const HandleClickEvent = (event) => {
+    console.log(event.target.id);
+    const id = event.target.id;
+    switch (id) {
+      case "reload":
+        dispatch(fetchMovies());
+      case "year":
+        dispatch(SortByYear());
+      case "rating":
+        dispatch(SortByRating());
+      default:
+        return;
+    }
   };
   return (
     <div>
       {error != "" ? <h3>{error}</h3> : ""}
       <h1>List</h1>
-      <button onClick={HandleClickEvent}>
+      <button id='reload' onClick={HandleClickEvent}>
         {"Reload "}
-        <img src={refresh} height='20px' width='20px'></img>
+        <img src={reloadIcon} height='20px' width='20px'></img>
       </button>
-
+      <button id='year' onClick={HandleClickEvent}>
+        {"Years "}
+        <img src={yearIcon} height='20px' width='20px'></img>
+      </button>
+      <button id='rating' onClick={HandleClickEvent}>
+        {"Rating "}
+        <img src={ratingIcon} height='20px' width='20px'></img>
+      </button>
       {movies.map((movie) => (
         <div key={movie.id}>
           <h3>{movie.title}</h3>
