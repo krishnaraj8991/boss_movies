@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ratingIcon, reloadIcon, yearIcon } from "../../assets";
+import Header from "../../Header";
 import {
   fetchMovies,
   SortByRating,
@@ -28,9 +29,14 @@ const MovieList = () => {
     }
   };
   return (
+    
     <div>
+      <Header/>
+      <div className='App'>
+        <header className='App-header'>
       {error != "" ? <h3>{error}</h3> : ""}
       <h1>List</h1>
+      <div className="buttons">
       <button id='reload' onClick={HandleClickEvent}>
         {"Reload "}
         <img src={reloadIcon} height='20px' width='20px'></img>
@@ -43,12 +49,40 @@ const MovieList = () => {
         {"Rating "}
         <img src={ratingIcon} height='20px' width='20px'></img>
       </button>
+      </div>
+
+      <div class="dropdown">
+         <button class="dropbtn">Sort movies by</button>
+         <div class="dropdown-content">
+           <div id="year">
+         <a id="year" href="#" onClick={HandleClickEvent}>Year of release</a>
+         <img src={yearIcon} height='20px' width='20px'></img>
+         </div>
+         <div id="rating">
+         <a id="rating" href="#" onClick={HandleClickEvent}>Rating</a>
+         <img src={ratingIcon} height='25px' width='25px'></img>
+         </div>
+         </div>
+      </div>
+
+      <div className="movie-container">
       {movies.map((movie) => (
         <div key={movie.id}>
+          <div className="movie">
+          <img src={movie.imageUrl}/>
+          <div className="movie-info">
           <h3>{movie.title}</h3>
-          <img src={movie.imageUrl} />
+          <p>{movie.rank}</p>
+          </div>
+          <div className="movie-over">
+        <h2>Description:</h2>
+        <h2>{movie.synopsis}</h2>
+        </div> 
         </div>
-      ))}
+        </div>
+      ))}</div>
+      </header>
+      </div>
     </div>
   );
 };
