@@ -1,8 +1,11 @@
 import React from "react";
 import "./styles.scss";
-export default function MovieTile({ movie }) {
+export default function MovieTile({ movie, onClick }) {
   return (
-    <div>
+    <div
+      onClick={() => {
+        onClick(movie.id);
+      }}>
       <div className='movie'>
         <img src={movie.imageUrl} />
         <div className='movie-info'>

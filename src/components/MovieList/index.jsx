@@ -8,10 +8,15 @@ import {
 } from "../../store/movies/moviesActions";
 import MovieTile from "../MovieTile";
 import "./styles.scss";
+import ReactModal from "react-modal";
+import MovieViewModal from "../MovieViewModal";
+
 const MovieList = () => {
   const movies = useSelector((state) => state.moviesList);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
+  const [isModalView, setIsModalView] = useState(false);
+  const [isSelected, setIsSelected] = useState(1);
   useEffect(() => {
     // console.log(movies, error);
   }, [movies]);
@@ -19,7 +24,7 @@ const MovieList = () => {
     dispatch(fetchMovies());
   }, []);
   const HandleClickEvent = (event) => {
-    console.log(event.target.id);
+    // console.log(event.target.id);
     const id = event.target.id;
     switch (id) {
       case "reload":
@@ -35,8 +40,21 @@ const MovieList = () => {
         return;
     }
   };
+  const MovieClick = (id) => {
+    // console.log(id);
+    setIsSelected(id);
+    setIsModalView((prev) => !prev);
+  };
   return (
     <div>
+      <MovieViewModal
+        isOpen={isModalView}
+        RequestClose={() => {
+          setIsModalView(false);
+        }}
+        // movie={movies[movies.find((movie) => movie.id == isSelected)]}
+        movie={movies.find((movie) => movie.id == isSelected)}
+      />
       <div className='App'>
         <header className='App-header'>
           {error != "" ? <h3>{error}</h3> : ""}
@@ -68,7 +86,7 @@ const MovieList = () => {
 
           <div className='movie-container'>
             {movies.map((movie) => (
-              <MovieTile key={movie.id} movie={movie} />
+              <MovieTile key={movie.id} movie={movie} onClick={MovieClick} />
             ))}
           </div>
         </header>

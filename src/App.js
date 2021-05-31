@@ -5,11 +5,13 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import Header from "./components/header";
 function App() {
-  
-return (
+  return (
     <Provider store={store}>
-      <Header/>
+      <Header />
       <MovieList />
+      {/* <ReactModal isOpen={true} style={{ minWidth: "500px" }}>
+        <h1>Modal View</h1>
+      </ReactModal> */}
     </Provider>
   );
 }
