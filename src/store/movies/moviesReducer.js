@@ -34,7 +34,7 @@ const reducer = (state = initialState, { type, payload }) => {
     }
     case SORT_BY_YEAR: {
       const next = state.moviesList;
-      next.sort((a, b) => b.releaseDate - a.releaseDate);
+      next.sort((a, b) => a.releaseDate - b.releaseDate);
       return { ...state, moviesList: [...next] };
     }
     default:
