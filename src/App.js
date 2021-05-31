@@ -8,7 +8,7 @@ function App() {
   
 return (
     <Provider store={store}>
-      <Headerooo />
+      <Header/>
       <MovieList />
     </Provider>
   );
