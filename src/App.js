@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import Header from "./components/header";
 function App() {
-  return (
+  
+return (
     <Provider store={store}>
       <Header />
       <MovieList />
