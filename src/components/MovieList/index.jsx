@@ -17,6 +17,7 @@ const MovieList = () => {
   const dispatch = useDispatch();
   const [isModalView, setIsModalView] = useState(false);
   const [isSelected, setIsSelected] = useState(1);
+  const [showRank, setShowRank] = useState(true);
   useEffect(() => {
     // console.log(movies, error);
   }, [movies]);
@@ -27,15 +28,20 @@ const MovieList = () => {
     // console.log(event.target.id);
     const id = event.target.id;
     switch (id) {
-      case "reload":
+      case "reload": {
         dispatch(fetchMovies());
         break;
-      case "year":
+      }
+      case "year": {
+        setShowRank(false);
         dispatch(SortByYear());
         break;
-      case "rating":
+      }
+      case "rating": {
+        setShowRank(true);
         dispatch(SortByRating());
         break;
+      }
       default:
         return;
     }
@@ -86,7 +92,12 @@ const MovieList = () => {
 
           <div className='movie-container'>
             {movies.map((movie) => (
-              <MovieTile key={movie.id} movie={movie} onClick={MovieClick} />
+              <MovieTile
+                key={movie.id}
+                movie={movie}
+                onClick={MovieClick}
+                showRank={showRank}
+              />
             ))}
           </div>
         </header>

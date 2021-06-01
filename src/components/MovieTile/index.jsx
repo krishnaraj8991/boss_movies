@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-export default function MovieTile({ movie, onClick }) {
+export default function MovieTile({ movie, onClick, showRank = true }) {
   return (
     <div
       onClick={() => {
@@ -10,7 +10,7 @@ export default function MovieTile({ movie, onClick }) {
         <img src={movie.imageUrl} />
         <div className='movie-info'>
           <h3>{movie.title}</h3>
-          <p>{movie.rank}</p>
+          {showRank ? <p>{movie.rank}</p> : <p>{movie.releaseDate}</p>}
         </div>
         <div className='movie-over'>
           <h2>Description:</h2>
