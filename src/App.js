@@ -4,6 +4,9 @@ import MovieList from "./components/MovieList";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Header from "./components/header";
+import Footer from "./components/footer";
+
+
 function App() {
   return (
     <Provider store={store}>
@@ -12,6 +15,7 @@ function App() {
       {/* <ReactModal isOpen={true} style={{ minWidth: "500px" }}>
         <h1>Modal View</h1>
       </ReactModal> */}
+    <Footer/>
     </Provider>
   );
 }
