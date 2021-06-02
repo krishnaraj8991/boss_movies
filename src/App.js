@@ -4,7 +4,7 @@ import MovieList from "./components/MovieList";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Header from "./components/header";
-import Footer from "./components/footer/index";
+import Footer from "./components/footer";
 
 
 function App() {
