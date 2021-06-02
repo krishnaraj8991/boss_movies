@@ -6,16 +6,15 @@ import store from "./store/store";
 import Header from "./components/header";
 import Footer from "./components/footer";
 
-
 function App() {
   return (
     <Provider store={store}>
-      <Header />
-      <MovieList />
+      <Header data-test='Header' />
+      <MovieList data-test='MovieList' />
       {/* <ReactModal isOpen={true} style={{ minWidth: "500px" }}>
         <h1>Modal View</h1>
       </ReactModal> */}
-    <Footer/>
+      <Footer data-test='Footer' />
     </Provider>
   );
 }

@@ -33,9 +33,9 @@ export const SortByRating = () => {
   };
 };
 export const fetchMovies = () => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(fetchMoviesRequest());
-    fetch("data.json", {
+    await fetch("data.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

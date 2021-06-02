@@ -1,3 +1,4 @@
+import { act } from "@testing-library/react";
 import {
   FETCH_MOVIES_FAILURE,
   FETCH_MOVIES_REQUEST,
@@ -13,7 +14,8 @@ const initialState = {
   error: "",
 };
 
-const reducer = (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, action) => {
+  const { type, payload } = action;
   switch (type) {
     case FETCH_MOVIES_REQUEST:
       return { ...state, loading: true };
