@@ -31,12 +31,12 @@ const reducer = (state = initialState, action) => {
       return { ...state, loading: false, error: payload };
     case SORT_BY_RATING: {
       const next = state.moviesList;
-      next.sort((a, b) => a.rank - b.rank);
+      next.sort((a, b) => b.rating.average - a.rating.average);
       return { ...state, moviesList: [...next] };
     }
     case SORT_BY_YEAR: {
       const next = state.moviesList;
-      next.sort((a, b) => a.releaseDate - b.releaseDate);
+      next.sort((a, b) => Date.parse(a.premiered) - Date.parse(b.premiered));
       return { ...state, moviesList: [...next] };
     }
     default:

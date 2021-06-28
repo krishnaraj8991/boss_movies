@@ -33,14 +33,14 @@ export default function MovieViewModal({ isOpen, RequestClose, movie }) {
       style={customStyles}>
       <div id='container'>
         <div id='image'>
-          <img src={movie?.imageUrl} />
+          <img src={movie?.image.original} />
         </div>
         <div id='info'>
-          <h1>Title:- {movie?.title}</h1>
-          <h1>Rank:- {movie?.rank}</h1>
-          <h1>ReleaseDate:- {movie?.releaseDate}</h1>
-          <h1>synopsis:-</h1>
-          <p>{movie?.synopsis}</p>
+          <h1>Title:- {movie?.name}</h1>
+          <h1>Rating:- {movie?.rating.average}</h1>
+          <h1>ReleaseDate:- {movie?.premiered}</h1>
+            <h1>synopsis:-</h1>
+            <p id="synopsis" dangerouslySetInnerHTML={{__html:movie?.summary}}></p>
         </div>
       </div>
     </ReactModal>

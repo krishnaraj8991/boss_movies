@@ -6,7 +6,7 @@ function Header() {
     <nav className='header'>
       <div>
         <h2 id='boss'>BOSS MOVIES</h2>
-        <p id='subt'> must watch movies from the ’80s</p>
+        <p id='subt'> must watch movies</p>
       </div>
     </nav>
   );

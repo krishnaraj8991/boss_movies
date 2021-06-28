@@ -35,9 +35,16 @@ export const SortByRating = () => {
 export const fetchMovies = () => {
   return async function (dispatch) {
     dispatch(fetchMoviesRequest());
-    await fetch("data.json", {
+    // await fetch("data.json", {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    // })
+    //
+    await fetch("http://api.tvmaze.com/shows", {
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         Accept: "application/json",
       },
     })
@@ -46,10 +53,11 @@ export const fetchMovies = () => {
         return response.json();
       })
       .then((myJson) => {
-        // console.log(myJson);
+        // console.log(myJson[0]);
+
         const payload = {
-          movieslabel: myJson.components[0],
-          moviesList: myJson.components[1].items,
+          movieslabel: {},
+          moviesList: myJson,
         };
         dispatch(fetchMoviesSuccess(payload));
       })
