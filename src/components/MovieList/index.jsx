@@ -16,6 +16,7 @@ import MovieTile from "../MovieTile";
 import "./styles.scss";
 import ReactModal from "react-modal";
 import MovieViewModal from "../MovieViewModal";
+import { Link } from "react-router-dom";
 
 const MovieList = () => {
   const movies = useSelector((state) => state.moviesList);
@@ -30,7 +31,9 @@ const MovieList = () => {
     // console.log(movies, error);
   }, [movies]);
   useEffect(() => {
-    dispatch(fetchMovies());
+    if (movies.length === 0) {
+      dispatch(fetchMovies());
+    }
   }, []);
   const HandleClickEvent = (event) => {
     // console.log(event.target.id);
@@ -70,7 +73,7 @@ const MovieList = () => {
   const MovieClick = (id) => {
     // console.log(id);
     setIsSelected(id);
-    setIsModalView((prev) => !prev);
+    // setIsModalView((prev) => !prev);
   };
   return (
     <div>
