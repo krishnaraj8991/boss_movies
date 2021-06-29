@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ratingIcon, reloadIcon, yearIcon,LeftArrow,RightArrow } from "../../assets";
+import {
+  ratingIcon,
+  reloadIcon,
+  yearIcon,
+  LeftArrow,
+  RightArrow,
+} from "../../assets";
 import {
   fetchMovies,
   SortByRating,
@@ -15,7 +21,8 @@ const MovieList = () => {
   const movies = useSelector((state) => state.moviesList);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
-  const [range,setRange]=useState(1);
+  const [rangeIdx, setRange] = useState(1);
+  const range = 20;
   const [isModalView, setIsModalView] = useState(false);
   const [isSelected, setIsSelected] = useState(0);
   const [showRank, setShowRank] = useState(true);
@@ -35,20 +42,24 @@ const MovieList = () => {
       }
       case "year": {
         setShowRank(false);
+        setRange(0);
         dispatch(SortByYear());
         break;
       }
       case "rating": {
         setShowRank(true);
+        setRange(0);
         dispatch(SortByRating());
         break;
       }
-      case "Prev":{
-        setRange(prev=>prev-10>0?prev-10:prev);
+      case "Prev": {
+        setRange((prev) => (prev - range > 0 ? prev - range : 0));
         break;
       }
-      case "Next":{
-        setRange(prev=>prev+10<=movies.length-10?prev+10:prev);
+      case "Next": {
+        setRange((prev) =>
+          prev + range < movies.length ? prev + range : prev
+        );
 
         break;
       }
@@ -75,20 +86,20 @@ const MovieList = () => {
         <header className='App-header'>
           {error != "" ? <h3>{error}</h3> : ""}
           <h1>List</h1>
-          <div className='buttons'>
+          {/* <div className='buttons'>
             <button id='reload' onClick={HandleClickEvent}>
               {"Reload "}
-              <img src={reloadIcon} height='20px' width='20px' alt=""></img>
+              <img src={reloadIcon} height='20px' width='20px' alt=''></img>
             </button>
-          </div>
+          </div> */}
           <div className='buttons'>
             <button id='Prev' onClick={HandleClickEvent}>
-              <img src={LeftArrow} height='20px' width='20px' alt=""></img>
+              <img src={LeftArrow} height='20px' width='20px' alt=''></img>
               {"Prev "}
             </button>
             <button id='Next' onClick={HandleClickEvent}>
               {"Next "}
-              <img src={RightArrow} height='20px' width='20px' alt=""></img>
+              <img src={RightArrow} height='20px' width='20px' alt=''></img>
             </button>
           </div>
 
@@ -97,28 +108,35 @@ const MovieList = () => {
             <div className='dropdown-content'>
               <div id='year' onClick={HandleClickEvent}>
                 {/* <a id='year' href='#'> */}
-                  Year of release
+                Year of release
                 {/* </a> */}
-                <img src={yearIcon} height='20px' width='20px' alt=""></img>
+                <img src={yearIcon} height='20px' width='20px' alt=''></img>
               </div>
               <div id='rating' onClick={HandleClickEvent}>
                 {/* <a id='rating' href='#'> */}
-                  Rating
+                Rating
                 {/* </a> */}
-                <img src={ratingIcon} height='25px' width='25px' alt=""></img>
+                <img src={ratingIcon} height='25px' width='25px' alt=''></img>
               </div>
             </div>
           </div>
 
           <div className='movie-container'>
-            {movies.slice(range,range+10).map((movie) => (
-              <MovieTile
-                key={movie.id}
-                movie={movie}
-                onClick={MovieClick}
-                showRank={showRank}
-              />
-            ))}
+            {movies
+              .slice(
+                rangeIdx,
+                rangeIdx + range < movies.length
+                  ? rangeIdx + range
+                  : movies.length
+              )
+              .map((movie) => (
+                <MovieTile
+                  key={movie.id}
+                  movie={movie}
+                  onClick={MovieClick}
+                  showRank={showRank}
+                />
+              ))}
           </div>
         </header>
       </div>

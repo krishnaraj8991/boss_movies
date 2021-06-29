@@ -16,8 +16,9 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
   overlay: {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    // opacity: "0.6",
+    backgroundColor: "rgba(0,0,0,0.7)",
+    // backgroundColor: "##131111",
+    // opacity: "0.1",
   },
 };
 export default function MovieViewModal({ isOpen, RequestClose, movie }) {
@@ -25,6 +26,7 @@ export default function MovieViewModal({ isOpen, RequestClose, movie }) {
   //   console.log(movie);
   return (
     <ReactModal
+      tras
       //   className='Modal'
       //   overlayClassName='Overlay'
       isOpen={isOpen}
@@ -39,8 +41,10 @@ export default function MovieViewModal({ isOpen, RequestClose, movie }) {
           <h1>Title:- {movie?.name}</h1>
           <h1>Rating:- {movie?.rating.average}</h1>
           <h1>ReleaseDate:- {movie?.premiered}</h1>
-            <h1>synopsis:-</h1>
-            <p id="synopsis" dangerouslySetInnerHTML={{__html:movie?.summary}}></p>
+          <h1>synopsis:-</h1>
+          <p
+            id='synopsis'
+            dangerouslySetInnerHTML={{ __html: movie?.summary }}></p>
         </div>
       </div>
     </ReactModal>
